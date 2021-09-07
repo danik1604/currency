@@ -26,9 +26,7 @@ class Convert
 
             if($res->getStatusCode() == '200'){
                 $data = (array) @json_decode($res->getBody(), true);
-                if($data){
-                    return $data['converted'];
-                }
+                return $data;
             }
         } catch (RequestException $e) {
             return false;
