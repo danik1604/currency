@@ -1,6 +1,6 @@
 <?php
 
-namespace Currency;
+namespace Gig\Currency;
 
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Client;
