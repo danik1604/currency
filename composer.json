@@ -1,11 +1,13 @@
 {
     "name": "gig/currency",
     "type": "library",
-    "license": "GPL-3.0-only",
     "require": {
-        "php": ">=7.2",
-        "guzzlehttp/guzzle": "~7.0"
+        "guzzlehttp/promises": "^1.4",
+        "guzzlehttp/psr7": "^2.0",
+        "psr/http-client": "^1.0",
+        "guzzlehttp/guzzle": "^7.3"
     },
+    "license": "GPL-3.0-only",
     "autoload": {
         "psr-4": {"Currency\\": "src/"}
     }
