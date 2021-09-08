@@ -9,6 +9,6 @@
     },
     "license": "GPL-3.0-only",
     "autoload": {
-        "psr-4": {"Gig\\Currency\\": "src/"}
+        "psr-4": {"Currency\\": "src/"}
     }
 }

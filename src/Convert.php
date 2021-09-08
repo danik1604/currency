@@ -1,20 +1,20 @@
 <?php
 
-namespace Gig\Currency;
+namespace Currency;
 
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 
-class Convert
+class ConvertApi
 {
 
-    private $apiUrl = "http://currency.dev39.shedevre.com";
+    const API_URL = "http://currency.dev39.shedevre.com";
 
     public function exchange($ccyFrom, $ccyTo, $amount)
     {
-        $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0]);
+        $client = new Client(['base_uri' => self::API_URL, 'timeout'  => 2.0]);
         try {
             $res = $client->request('POST', '/api/convert', [
                 'form_params' => [
