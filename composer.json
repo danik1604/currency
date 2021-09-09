@@ -1,5 +1,5 @@
 {
-    "name": "gig/currency",
+    "name": "danik1604/currency",
     "type": "library",
     "require": {
         "guzzlehttp/promises": "^1.4",
