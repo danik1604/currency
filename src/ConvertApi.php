@@ -35,4 +35,25 @@ class ConvertApi
         return false;
     }
 
+    public function getRates(array $ccy = [])
+    {
+        $client = new Client(['base_uri' => self::API_URL, 'timeout'  => 2.0]);
+        try {
+            $res = $client->request('POST', '/api/get-rates', [
+                'form_params' => [
+                    'ccy' => $ccy
+                ]
+            ]);
+
+            if($res->getStatusCode() == '200'){
+                $data = (array) @json_decode($res->getBody(), true);
+                return $data;
+            }
+        } catch (RequestException $e) {
+            return false;
+        }
+
+        return false;
+    }
+
 }
