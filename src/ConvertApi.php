@@ -10,11 +10,16 @@ use GuzzleHttp\Exception\RequestException;
 class ConvertApi
 {
 
-    const API_URL = "http://currency.dev39.shedevre.com";
+    private $apiUrl;
+
+    public function __construct($apiUrl)
+    {
+        $this->apiUrl = $apiUrl;
+    }
 
     public function exchange($ccyFrom, $ccyTo, $amount)
     {
-        $client = new Client(['base_uri' => self::API_URL, 'timeout'  => 2.0]);
+        $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0]);
         try {
             $res = $client->request('POST', '/api/convert', [
                 'form_params' => [
@@ -37,7 +42,7 @@ class ConvertApi
 
     public function getRates(array $ccy = [])
     {
-        $client = new Client(['base_uri' => self::API_URL, 'timeout'  => 2.0]);
+        $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0]);
         try {
             $res = $client->request('POST', '/api/get-rates', [
                 'form_params' => [
