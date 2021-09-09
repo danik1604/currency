@@ -5,7 +5,8 @@ namespace Currency;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-
+use GuzzleHttp\HandlerStack;
+use GuzzleRetry\GuzzleRetryMiddleware;
 
 class ConvertApi
 {
@@ -19,7 +20,9 @@ class ConvertApi
 
     public function exchange($ccyFrom, $ccyTo, $amount)
     {
-        $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0]);
+        $stack = HandlerStack::create();
+        $stack->push(GuzzleRetryMiddleware::factory());
+        $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0, 'handler' => $stack]);
         try {
             $res = $client->request('POST', '/api/convert', [
                 'form_params' => [
@@ -42,7 +45,10 @@ class ConvertApi
 
     public function getRates(array $ccy = [])
     {
-        $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0]);
+        $stack = HandlerStack::create();
+        $stack->push(GuzzleRetryMiddleware::factory());
+        $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0, 'handler' => $stack]);
+        
         try {
             $res = $client->request('POST', '/api/get-rates', [
                 'form_params' => [
