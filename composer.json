@@ -6,7 +6,6 @@
         "guzzlehttp/psr7": "^2.0",
         "psr/http-client": "^1.0",
         "guzzlehttp/guzzle": "^7.3",
-        "caseyamcl/guzzle_retry_middleware":  "^2.6"
     },
     "license": "GPL-3.0-only",
     "autoload": {

@@ -6,8 +6,7 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\HandlerStack;
-use GuzzleRetry\GuzzleRetryMiddleware;
+
 
 class ConvertApi
 {
@@ -24,9 +23,6 @@ class ConvertApi
 
     public function exchange($ccyFrom, $ccyTo, $amount)
     {
-        // $stack = HandlerStack::create();
-        // $stack->push(GuzzleRetryMiddleware::factory());
-        // $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0, 'handler' => $stack]);
         $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0]);
         try {
             $res = $client->request('POST', '/api/convert', [
@@ -60,9 +56,6 @@ class ConvertApi
 
     public function getRates(array $ccy = [])
     {
-        // $stack = HandlerStack::create();
-        // $stack->push(GuzzleRetryMiddleware::factory());
-        // $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0, 'handler' => $stack]);
         $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0]);
     
         try {
