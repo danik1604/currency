@@ -5,6 +5,7 @@ namespace Currency;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\HandlerStack;
 use GuzzleRetry\GuzzleRetryMiddleware;
 
@@ -50,6 +51,8 @@ class ConvertApi
 
         } catch (RequestException $e){
             return false;
+        } catch (Exception $e){
+            return false;
         }
 
         return false;
@@ -82,6 +85,8 @@ class ConvertApi
             return $this->getRates($ccy);
 
         } catch (RequestException $e){
+            return false;
+        } catch (Exception $e){
             return false;
         }
 
