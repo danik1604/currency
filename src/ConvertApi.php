@@ -57,10 +57,11 @@ class ConvertApi
 
     public function getRates(array $ccy = [])
     {
-        $stack = HandlerStack::create();
-        $stack->push(GuzzleRetryMiddleware::factory());
-        $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0, 'handler' => $stack]);
-        
+        // $stack = HandlerStack::create();
+        // $stack->push(GuzzleRetryMiddleware::factory());
+        // $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0, 'handler' => $stack]);
+        $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0]);
+    
         try {
             $res = $client->request('POST', '/api/get-rates', [
                 'form_params' => [
