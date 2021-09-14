@@ -42,7 +42,7 @@ class ConvertApi
                 return $data;
             }
         } catch (ConnectException $e) {
-            if($tryCount > self::MAX_TRY_COUNT){
+            if($this->tryCount > self::MAX_TRY_COUNT){
                 return false;
             }
 
@@ -77,7 +77,7 @@ class ConvertApi
                 return $data;
             }
         } catch (ConnectException $e) {
-            if($tryCount > self::MAX_TRY_COUNT){
+            if($this->tryCount > self::MAX_TRY_COUNT){
                 return false;
             }
 
