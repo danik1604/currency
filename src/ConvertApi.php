@@ -35,7 +35,10 @@ class ConvertApi
 
             if($res->getStatusCode() == '200'){
                 $data = (array) @json_decode($res->getBody(), true);
-                return $data;
+                if($data['success']){
+                    return $data['data'];
+                }
+                return false;
             }
         } catch (ConnectException $e) {
             if($this->tryCount > self::MAX_TRY_COUNT){
@@ -67,7 +70,10 @@ class ConvertApi
 
             if($res->getStatusCode() == '200'){
                 $data = (array) @json_decode($res->getBody(), true);
-                return $data;
+                if($data['success']){
+                    return $data['data'];
+                }
+                return false;
             }
         } catch (ConnectException $e) {
             if($this->tryCount > self::MAX_TRY_COUNT){
