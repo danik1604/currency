@@ -62,7 +62,7 @@ class ConvertApi
         $client = new Client(['base_uri' => $this->apiUrl, 'timeout'  => 2.0]);
     
         try {
-            $res = $client->request('POST', '/api/get-euro-rates', [
+            $res = $client->request('GET', '/api/get-euro-rates', [
                 'form_params' => [
                     'ccy' => $ccy
                 ]
