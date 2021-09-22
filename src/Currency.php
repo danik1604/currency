@@ -73,7 +73,7 @@ class Currency
 
 		$code = $current['CCY'];
 		$title = $current['TYTLE'];
-		// $symbol_left = $current['symbol_left'];
+		$symbol = $current['SYMBOL'];
 		// $symbol_right = $current['symbol_right'];
 		$decimal_place = $current['DECIMAL_PLACE'];
 
@@ -81,7 +81,7 @@ class Currency
 
 		$string = '';
 		$string .= number_format($amount, (int)$decimal_place, '.', ',');
-		$string .= ' ' . $code;
+		$string .= ' ' . $symbol ?: $code;
 
 		return $string;
 	}
