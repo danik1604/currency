@@ -7,8 +7,12 @@ class Currency
 
 	private $currencies = [];
 
-	public function __construct(dbSimple $db)
+	public function __construct($db)
 	{
+		
+		if(!($db instanceof \_class\dbSimple)){
+			return false;
+		}
 
 		$this->currencies = [];
 
