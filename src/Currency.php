@@ -7,17 +7,10 @@ class Currency
 
 	private $currencies = [];
 
-	public function __construct($db)
+	public function __construct(\_class\dbSimple $db)
 	{
-		
-		if(!($db instanceof \_class\dbSimple)){
-			return false;
-		}
-
 		$this->currencies = [];
-
 		$result = $db->select("SELECT * FROM ccy_rates");
-
 		while ($row = $db->fetch_assoc($result)) {
 			$this->currencies[$row['CCY']] = $row;
 		}
