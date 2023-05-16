@@ -11,14 +11,26 @@ use GuzzleHttp\Exception\ConnectException;
 class ConvertApi
 {
 
-    private $apiUrl;
+    protected $apiUrl;
+    protected $tryCount = 0;
+    protected $error;
+    protected $errorMessage;
 
     const MAX_TRY_COUNT = 10;
-    private $tryCount = 0;
 
     public function __construct($apiUrl)
     {
         $this->apiUrl = $apiUrl;
+    }
+
+    public function getError()
+    {
+        return $this->error;
+    }
+    
+    public function getErrorMessage()
+    {
+        return $this->errorMessage;
     }
 
     public function exchange($ccyFrom, $ccyTo, $amount)
@@ -38,10 +50,15 @@ class ConvertApi
                 if($data['success']){
                     return $data['data'];
                 }
+
+                $this->error = 1;
+                $this->errorMessage = json_encode($data);
                 return false;
             }
         } catch (ConnectException $e) {
             if($this->tryCount > self::MAX_TRY_COUNT){
+                $this->error = 2;
+                $this->errorMessage = "Reached maximal MAX_TRY_COUNT";
                 return false;
             }
 
@@ -49,8 +66,12 @@ class ConvertApi
             return $this->exchange($ccyFrom, $ccyTo, $amount);
 
         } catch (RequestException $e){
+            $this->error = 3;
+            $this->errorMessage = $e->getMessage();
             return false;
         } catch (Exception $e){
+            $this->error = 4;
+            $this->errorMessage = $e->getMessage();
             return false;
         }
 
@@ -73,10 +94,15 @@ class ConvertApi
                 if($data['success']){
                     return $data['data'];
                 }
+
+                $this->error = 1;
+                $this->errorMessage = json_encode($data);
                 return false;
             }
         } catch (ConnectException $e) {
             if($this->tryCount > self::MAX_TRY_COUNT){
+                $this->error = 2;
+                $this->errorMessage = "Reached maximal MAX_TRY_COUNT";
                 return false;
             }
 
@@ -84,8 +110,12 @@ class ConvertApi
             return $this->getRates($ccy);
 
         } catch (RequestException $e){
+            $this->error = 3;
+            $this->errorMessage = $e->getMessage();
             return false;
         } catch (Exception $e){
+            $this->error = 4;
+            $this->errorMessage = $e->getMessage();
             return false;
         }
 
